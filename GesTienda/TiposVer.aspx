@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="InfoContenido" runat="server">
-    <div class="contenidotitulo">Tipos de productos</div>
+    <div class="contenidotitulo" style="text-align:center">Tipos de productos</div> <br />
 <br />
     <asp:GridView ID="grdTipos" runat="server" AllowCustomPaging="True" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="IdTipo" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" PageSize="5">
         <AlternatingRowStyle BackColor="White" />
