@@ -37,11 +37,13 @@
     <asp:GridView ID="grdProductos" runat="server" AllowCustomPaging="True" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="IdProducto" DataSourceID="SqlDataSource2" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" PageSize="5">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
-            <asp:BoundField DataField="IdProducto" HeaderText="IdProducto" ReadOnly="True" SortExpression="IdProducto" />
-            <asp:BoundField DataField="DesPro" HeaderText="DesPro" SortExpression="DesPro" />
-            <asp:BoundField DataField="PrePro" HeaderText="PrePro" SortExpression="PrePro" />
-            <asp:BoundField DataField="IdUnidad" HeaderText="IdUnidad" SortExpression="IdUnidad" />
-            <asp:BoundField DataField="IdTipo" HeaderText="IdTipo" SortExpression="IdTipo" />
+            <asp:BoundField DataField="IdProducto" HeaderText="Id Producto" ReadOnly="True" SortExpression="IdProducto" />
+            <asp:BoundField DataField="DesPro" HeaderText="Descripcion" SortExpression="DesPro" />
+            <asp:BoundField DataField="PrePro" HeaderText="Precio" SortExpression="PrePro" DataFormatString="{0:n2}" >
+            <ItemStyle HorizontalAlign="Right" />
+            </asp:BoundField>
+            <asp:BoundField DataField="IdUnidad" HeaderText="Unidad" SortExpression="IdUnidad" />
+            <asp:BoundField DataField="IdTipo" HeaderText="Tipo" SortExpression="IdTipo" />
         </Columns>
         <EditRowStyle BackColor="#2461BF" />
         <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
