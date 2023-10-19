@@ -6,7 +6,7 @@
 
         <div class="contenidotitulo" style="text-align:center">Tipos de productos</div><br />
        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [IdTipo], [DesTip] FROM [TIPO]"></asp:SqlDataSource>
-    <asp:GridView ID="grdTipos" runat="server" AllowCustomPaging="True" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="IdTipo" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" PageSize="5">
+    <asp:GridView ID="grdTipos" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="IdTipo" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" PageSize="5" Width="50%">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:CommandField ShowSelectButton="True" />
@@ -28,22 +28,22 @@
 
     <br /><br />
 
-    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [PRODUCTO] WHERE ([IdTipo] = @IdTipo)">
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [IdProducto], [DesPro], [PrePro], [IdUnidad], [DesTip] FROM [ProductosDet] WHERE ([IdTipo] = @IdTipo)">
         <SelectParameters>
             <asp:ControlParameter ControlID="grdTipos" Name="IdTipo" PropertyName="SelectedValue" Type="String" />
         </SelectParameters>
         </asp:SqlDataSource>
       <div class="contenidotitulo" style="text-align:center">Productos</div><br />
-    <asp:GridView ID="grdProductos" runat="server" AllowCustomPaging="True" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="IdProducto" DataSourceID="SqlDataSource2" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" PageSize="5">
+    <asp:GridView ID="grdProductos" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="IdProducto" DataSourceID="SqlDataSource2" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" PageSize="5" Width="50%">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
-            <asp:BoundField DataField="IdProducto" HeaderText="Id Producto" ReadOnly="True" SortExpression="IdProducto" />
-            <asp:BoundField DataField="DesPro" HeaderText="Descripcion" SortExpression="DesPro" />
-            <asp:BoundField DataField="PrePro" HeaderText="Precio" SortExpression="PrePro" DataFormatString="{0:n2}" >
+            <asp:BoundField DataField="IdProducto" HeaderText="Id Producto" SortExpression="IdProducto" ReadOnly="True" />
+                        <asp:BoundField DataField="DesPro" HeaderText="Descripcion" SortExpression="DesPro" />
+             <asp:BoundField DataField="PrePro" HeaderText="Precio" SortExpression="PrePro" DataFormatString="{0:n2}" >
             <ItemStyle HorizontalAlign="Right" />
             </asp:BoundField>
             <asp:BoundField DataField="IdUnidad" HeaderText="Unidad" SortExpression="IdUnidad" />
-            <asp:BoundField DataField="IdTipo" HeaderText="Tipo" SortExpression="IdTipo" />
+            <asp:BoundField DataField="DesTip" HeaderText="Tipo" SortExpression="DesTip" />        
         </Columns>
         <EditRowStyle BackColor="#2461BF" />
         <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
