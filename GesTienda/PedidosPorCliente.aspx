@@ -27,7 +27,7 @@
         <SortedDescendingHeaderStyle BackColor="#4870BE" />
     </asp:GridView>
     <br />
+        <asp:Label ID="lblMensajes" runat="server" Text=""></asp:Label><br />
            <asp:Label ID="lblTotal" runat="server" Text="" Visible="False"></asp:Label><br />
        <asp:Label ID="lblResultado" runat="server" Text=""></asp:Label><br />
-    <asp:Label ID="lblMensajes" runat="server" Text=""></asp:Label>
 </asp:Content>

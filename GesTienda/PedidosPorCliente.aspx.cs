@@ -18,6 +18,7 @@ namespace GesTienda
 
         protected void grdClientes_SelectedIndexChanged(object sender, EventArgs e)
         {
+            float totales = 0; //NUEVA VARIABLE CREADA POR MACA
             int InNumeroFilas;
             string StrResultado, StrError;
             string StrCadenaConexion =
@@ -27,8 +28,8 @@ namespace GesTienda
             "SUM(CanDet*PreDet-CanDet*PreDet*DtoDet/100) AS Total " +
             "FROM PEDIDO INNER JOIN DETALLE ON PEDIDO.IdPedido = DETALLE.IdPedido " +
             "GROUP BY PEDIDO.IdPedido, PEDIDO.FecPed, PEDIDO.CobPed, PEDIDO.SerPed, PEDIDO.IdCliente " +
-            "HAVING (PEDIDO.IdCliente = '" + strClienteSeleccionado + "'); ";
-            decimal DcTotal = 0;
+            "HAVING(PEDIDO.IdCliente = '" + strClienteSeleccionado + "'); ";
+        decimal DcTotal = 0;
             lblMensajes.Text = "";
             lblResultado.Visible = false;
             lblTotal.Visible = false;
@@ -42,6 +43,7 @@ namespace GesTienda
                     SqlDataReader reader = comando.ExecuteReader();
                     if (reader.HasRows)
                     {
+
                         InNumeroFilas = 0;
                         lblResultado.Visible = true;
                         lblTotal.Visible = true;
@@ -73,8 +75,12 @@ namespace GesTienda
                             string.Format("{0:c}", reader.GetValue(4)) + "&nbsp; </div>";
                             StrResultado += "</div>";
                             InNumeroFilas++;
+                            totales= totales + Convert.ToSingle(reader.GetValue(4)); //VARIABLE CREADA POR MI
                         }
                         StrResultado += "</div>";
+                        lblMensajes.Text = StrResultado; //FALTABA ESTA LÍNEA! 
+                        lblTotal.Text = "\nNúmero de Pedidos Realizados: " + InNumeroFilas;  //FALTABA ESTA LÍNEA!
+                        lblResultado.Text = "El importe total de los pedidos realizados por el cliente:" + totales;  //FALTABA ESTA LÍNEA!
 
                     }
                     else

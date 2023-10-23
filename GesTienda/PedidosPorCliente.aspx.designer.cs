@@ -33,6 +33,15 @@ namespace GesTienda
         protected global::System.Web.UI.WebControls.GridView grdClientes;
 
         /// <summary>
+        /// Control lblMensajes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensajes;
+
+        /// <summary>
         /// Control lblTotal.
         /// </summary>
         /// <remarks>
@@ -49,14 +58,5 @@ namespace GesTienda
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblResultado;
-
-        /// <summary>
-        /// Control lblMensajes.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensajes;
     }
 }
