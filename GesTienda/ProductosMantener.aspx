@@ -7,7 +7,7 @@
   
     
     <div class="table" style="display:flex; flex-direction:row; width:100%">
-    <asp:GridView runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="IdProducto" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None" Width="500px">
+    <asp:GridView runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="IdProducto" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None" Width="500px" OnSelectedIndexChanged="grdProductos_SelectedIndexChanged" ID="grdProductos">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:CommandField ShowSelectButton="True" />
@@ -44,13 +44,13 @@
          <asp:Label runat="server" Text="Tipo Producto" ID="lblIdTipo" Font-Bold="True" Font-Size="Medium" style="margin-right:15px"></asp:Label>
         <asp:DropDownList runat="server" ID="ddlIdTipo" Enabled="False" DataSourceID="SqlDataSource3" DataTextField="DesTip" DataValueField="DesTip"></asp:DropDownList> <br /><br />
         
-            <asp:Button runat="server" Text="Nuevo" ID="btnNuevo" Visible="true" />
+            <asp:Button runat="server" Text="Nuevo" ID="btnNuevo" Visible="true" OnClick="btnNuevo_Click" />
             <asp:Button runat="server" Text="Editar" ID="btnEditar" Visible="False"  />
             <asp:Button runat="server" Text="Eliminar" ID="btnEliminar" Visible="False"  />
-            <asp:Button runat="server" Text="Insertar" ID="btnInsertar" Visible="False"  />
+            <asp:Button runat="server" Text="Insertar" ID="btnInsertar" Visible="False" OnClick="btnInsertar_Click"  />
             <asp:Button runat="server" Text="Modificar" ID="btnModificar" Visible="False"  />
             <asp:Button runat="server" Text="Borrar" ID="btnBorrar" Visible="False"  />
-            <asp:Button runat="server" Text="Cancelar" ID="btnCancelar" Visible="False"  />
+            <asp:Button runat="server" Text="Cancelar" ID="btnCancelar" Visible="False" OnClick="btnCancelar_Click"  />
 
 
         </div>
