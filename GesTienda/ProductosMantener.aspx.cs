@@ -88,6 +88,8 @@ namespace GesTienda
             }
         }
 
+
+
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
             lblMensajes.Text = "";
@@ -109,14 +111,6 @@ namespace GesTienda
             txtIdProducto.Focus();
         }
 
-
-
-        protected string FnComaPorPunto(decimal Numero)
-        {
-            string StrNumero = Convert.ToString(Numero);
-            string stNumeroConPunto = String.Format("{0}", StrNumero.Replace(',', '.'));
-            return (stNumeroConPunto);
-        }
 
         protected void btnInsertar_Click(object sender, EventArgs e)
         {
@@ -148,12 +142,6 @@ namespace GesTienda
                     else
                         lblMensajes.Text = "Error al insertar el registro";
                     btnNuevo.Visible = true;
-                    btnEditar.Visible = false;
-                    btnEliminar.Visible = false;
-                    btnInsertar.Visible = false;
-                    btnModificar.Visible = false;
-                    btnBorrar.Visible = false;
-                    btnCancelar.Visible = false;
                 }
                 catch (SqlException ex)
                 {
@@ -167,10 +155,13 @@ namespace GesTienda
             grdProductos.DataBind();
             grdProductos.SelectedIndex = -1;
             FnDeshabilitarControles();
+        }
 
-
-
-
+        protected string FnComaPorPunto(decimal Numero)
+        {
+            string StrNumero = Convert.ToString(Numero);
+            string stNumeroConPunto = String.Format("{0}", StrNumero.Replace(',', '.'));
+            return (stNumeroConPunto);
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
@@ -191,5 +182,12 @@ namespace GesTienda
             grdProductos.SelectedIndex = -1;
             FnDeshabilitarControles();
         }
+
+
+
+
+
+
+
     }
 }

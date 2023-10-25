@@ -3,7 +3,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="InfoContenido" runat="server">
      <div class="contenidotitulo" style="text-align:center">Mantenimiento Productos</div><br />
-    <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [IdProducto], [DesPro], [PrePro] FROM [PRODUCTO]"></asp:SqlDataSource>
   
     
     <div class="table" style="display:flex; flex-direction:row; width:100%">
@@ -30,19 +29,19 @@
 
         <div style="margin-left:30px;">
         <asp:Label runat="server" Text="Id. Producto" ID="lblIdProducto" Font-Bold="True" Font-Size="Medium" style="margin-right:15px"></asp:Label>
-        <asp:TextBox runat="server" ID="txtIdProducto" Enabled="False"></asp:TextBox><br /><br />
+        <asp:TextBox runat="server" ID="txtIdProducto" AssociatedControlID="IdProducto" Enabled="False"></asp:TextBox><br /><br />
         
-        <asp:Label runat="server" Text="Descripción" ID="lblDesPro" Font-Bold="True" Font-Size="Medium" style="margin-right:15px"></asp:Label>
-        <asp:TextBox runat="server" ID="txtDesPro" Enabled="False"></asp:TextBox><br /><br />
+        <asp:Label runat="server" Text="Descripción" ID="lblDesPro" Font-Bold="True" Font-Size="Medium" style="margin-right:15px" ></asp:Label>
+        <asp:TextBox runat="server" ID="txtDesPro" AssociatedControlID="DesPro" Enabled="False"></asp:TextBox><br /><br />
         
         <asp:Label runat="server" Text="Precio" ID="lblPrePro" Font-Bold="True" Font-Size="Medium" style="margin-right:15px"></asp:Label>
-        <asp:TextBox runat="server" ID="txtPrePro" Enabled="False">0</asp:TextBox><br /><br />
+        <asp:TextBox runat="server" ID="txtPrePro" AssociatedControlID="PrePro" Enabled="False">0</asp:TextBox><br /><br />
 
          <asp:Label runat="server" Text="Unidad" ID="lblIdUnidad" Font-Bold="True" Font-Size="Medium" style="margin-right:15px"></asp:Label>
-        <asp:DropDownList runat="server" ID="ddlIdUnidad" Enabled="False" DataSourceID="SqlDataSource2" DataTextField="IdUnidad" DataValueField="IdUnidad"></asp:DropDownList> <br /><br />
+        <asp:DropDownList runat="server" ID="ddlIdUnidad" AssociatedControlID="IdUnidad" Enabled="False" DataSourceID="SqlDataSource2" DataTextField="IdUnidad" DataValueField="IdUnidad"></asp:DropDownList> <br /><br />
 
          <asp:Label runat="server" Text="Tipo Producto" ID="lblIdTipo" Font-Bold="True" Font-Size="Medium" style="margin-right:15px"></asp:Label>
-        <asp:DropDownList runat="server" ID="ddlIdTipo" Enabled="False" DataSourceID="SqlDataSource3" DataTextField="DesTip" DataValueField="DesTip"></asp:DropDownList> <br /><br />
+        <asp:DropDownList runat="server" ID="ddlIdTipo" AssociatedControlID="IdTipo" Enabled="False" DataSourceID="SqlDataSource3" DataTextField="DesTip" DataValueField="IdTipo"></asp:DropDownList> <br /><br />
         
             <asp:Button runat="server" Text="Nuevo" ID="btnNuevo" Visible="true" OnClick="btnNuevo_Click" />
             <asp:Button runat="server" Text="Editar" ID="btnEditar" Visible="False"  />
@@ -56,8 +55,9 @@
         </div>
 
     </div>
-    <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [IdUnidad] FROM [UNIDAD]"></asp:SqlDataSource>
-    <asp:SqlDataSource runat="server" ID="SqlDataSource3" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [DesTip] FROM [TIPO]"></asp:SqlDataSource>
+    <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [IdProducto], [DesPro], [PrePro] FROM [PRODUCTO]"></asp:SqlDataSource>
+    <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [UNIDAD]"></asp:SqlDataSource>
+    <asp:SqlDataSource runat="server" ID="SqlDataSource3" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [TIPO]"></asp:SqlDataSource>
     
     <asp:Label ID="lblMensajes" runat="server" Text=""></asp:Label><br />
     <asp:Label ID="lblResultado" runat="server" Text=""></asp:Label><br />
