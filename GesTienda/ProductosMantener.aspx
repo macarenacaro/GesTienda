@@ -44,10 +44,10 @@
         <asp:DropDownList runat="server" ID="ddlIdTipo" AssociatedControlID="IdTipo" Enabled="False" DataSourceID="SqlDataSource3" DataTextField="DesTip" DataValueField="IdTipo"></asp:DropDownList> <br /><br />
         
             <asp:Button runat="server" Text="Nuevo" ID="btnNuevo" Visible="true" OnClick="btnNuevo_Click" />
-            <asp:Button runat="server" Text="Editar" ID="btnEditar" Visible="False"  />
+            <asp:Button runat="server" Text="Editar" ID="btnEditar" Visible="False" OnClick="btnEditar_Click"   />
             <asp:Button runat="server" Text="Eliminar" ID="btnEliminar" Visible="False"  />
             <asp:Button runat="server" Text="Insertar" ID="btnInsertar" Visible="False" OnClick="btnInsertar_Click"  />
-            <asp:Button runat="server" Text="Modificar" ID="btnModificar" Visible="False"  />
+            <asp:Button runat="server" Text="Modificar" ID="btnModificar" Visible="False" OnClick="btnModificar_Click"  />
             <asp:Button runat="server" Text="Borrar" ID="btnBorrar" Visible="False"  />
             <asp:Button runat="server" Text="Cancelar" ID="btnCancelar" Visible="False" OnClick="btnCancelar_Click"  />
 

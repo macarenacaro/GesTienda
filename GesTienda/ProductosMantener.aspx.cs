@@ -183,11 +183,79 @@ namespace GesTienda
             FnDeshabilitarControles();
         }
 
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+
+            lblMensajes.Text = "";
+            btnNuevo.Visible = false;
+            btnEditar.Visible = false;
+            btnEliminar.Visible = false;
+            btnInsertar.Visible = true;
+            btnModificar.Visible = true;
+            btnBorrar.Visible = false;
+            btnCancelar.Visible = true;
+            txtPrePro.Text = Convert.ToString(0);
+            ddlIdUnidad.DataBind();
+            // Vuelve a enlazar el control para que se actualicen los datos
+            ddlIdTipo.DataBind();
+            grdProductos.SelectedIndex = -1;
+            FnHabilitarControles();
+            txtIdProducto.Enabled = false;
+            txtIdProducto.Focus();
+        }
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
+            lblMensajes.Text = "";
+            String strIdProducto, strDescripcion, strIdUnidad, strIdTipo;
+            Decimal dcPrecio;
+            strIdProducto = txtIdProducto.Text;
+            strDescripcion = txtDesPro.Text;
+            dcPrecio = Convert.ToDecimal(txtPrePro.Text);
+            strIdUnidad = ddlIdUnidad.SelectedItem.Text;
+            strIdTipo = ddlIdTipo.SelectedItem.Value;
+            string StrCadenaConexion =
+            ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
+            //
+
+            string StrComandoSql = "UPDATE PRODUCTO " +
+    "SET DesPro = '" + strDescripcion + "', " +
+    "PrePro = " + FnComaPorPunto(dcPrecio) + ", " +
+    "IdUnidad = '" + strIdUnidad + "', " +
+    "IdTipo = '" + strIdTipo + "' " +
+    "WHERE IdProducto = " + strIdProducto + ";";
 
 
-
-
-
-
+            int InNumeroFilas;
+            //abrir la base de datos
+            using (SqlConnection conexion = new SqlConnection(StrCadenaConexion))
+            {
+                /*
+                try
+                {
+                    conexion.Open();
+                    SqlCommand comando = conexion.CreateCommand();
+                    comando.CommandText = StrComandoSql;
+                    int inRegistrosAfectados = comando.ExecuteNonQuery();
+                    if (inRegistrosAfectados == 1)
+                        lblMensajes.Text = "Registro modficado correctamente";
+                    else
+                        lblMensajes.Text = "Error al modificar el registro";
+                    btnNuevo.Visible = true;
+                }
+                catch (SqlException ex)
+                {
+                    string StrError = "<p>Se han producido errores en el acceso a la base de datos.</p>";
+                    StrError = StrError + "<div>Código: " + ex.Number + "</div>";
+                    StrError = StrError + "<div>Descripción: " + ex.Message + "</div>";
+                    lblMensajes.Text = StrError;
+                    return;
+                }*/
+           }
+            grdProductos.DataBind();
+            grdProductos.SelectedIndex = -1;
+            FnDeshabilitarControles();
+        }
     }
 }
