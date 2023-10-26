@@ -185,7 +185,7 @@ namespace GesTienda
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-
+            //HABILIDADES DE BOTONES
             lblMensajes.Text = "";
             btnNuevo.Visible = false;
             btnEditar.Visible = false;
@@ -194,7 +194,10 @@ namespace GesTienda
             btnModificar.Visible = true;
             btnBorrar.Visible = false;
             btnCancelar.Visible = true;
-            txtPrePro.Text = Convert.ToString(0);
+
+
+            //LOS TEXTBOX
+            txtPrePro.Text = Convert.ToString(0); //el de precio queda en 0
             ddlIdUnidad.DataBind();
             // Vuelve a enlazar el control para que se actualicen los datos
             ddlIdTipo.DataBind();
@@ -207,42 +210,62 @@ namespace GesTienda
         protected void btnModificar_Click(object sender, EventArgs e)
         {
             lblMensajes.Text = "";
-            String strIdProducto, strDescripcion, strIdUnidad, strIdTipo;
-            Decimal dcPrecio;
-            strIdProducto = txtIdProducto.Text;
-            strDescripcion = txtDesPro.Text;
-            dcPrecio = Convert.ToDecimal(txtPrePro.Text);
-            strIdUnidad = ddlIdUnidad.SelectedItem.Text;
-            strIdTipo = ddlIdTipo.SelectedItem.Value;
-            string StrCadenaConexion =
-            ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
 
-            //
+            // Recupera los datos de los controles
+            string strIdProducto = txtIdProducto.Text;
+            string strDescripcion = txtDesPro.Text;
+            decimal dcPrecio = Convert.ToDecimal(txtPrePro.Text);
+            string strIdUnidad = ddlIdUnidad.SelectedItem.Text;
+            string strIdTipo = ddlIdTipo.SelectedItem.Value;
 
-            string StrComandoSql = "UPDATE PRODUCTO " +
-    "SET DesPro = '" + strDescripcion + "', " +
-    "PrePro = " + FnComaPorPunto(dcPrecio) + ", " +
-    "IdUnidad = '" + strIdUnidad + "', " +
-    "IdTipo = '" + strIdTipo + "' " +
-    "WHERE IdProducto = " + strIdProducto + ";";
+            // Define la declaración SQL de actualización utilizando parámetros
+            string update = "UPDATE PRODUCTO " +
+                           "SET DesPro = @Descripcion, " + //"@"es un marcador de posición para un parámetro en una consulta SQL 
+                           "PrePro = @Precio, " +
+                           "IdUnidad = @IdUnidad, " +
+                           "IdTipo = @IdTipo " +
+                           "WHERE IdProducto = @IdProducto";
+            //Los valores para estos "@" parámetros se establecen en tiempo de ejecución utilizando el método Parameters.
+            //AddWithValue en el objeto SqlCommand.
 
 
-            int InNumeroFilas;
-            //abrir la base de datos
-            using (SqlConnection conexion = new SqlConnection(StrCadenaConexion))
+            //ESTABLECER CONEXION
+            string StrCadenaConexion = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
+
+            /*USING: Crea una conexión a la base de datos utilizando la cadena de conexión especificada en 
+             * StrCadenaConexion y garantiza que la conexión se cierre de manera adecuada una vez que
+             * se haya completado la ejecución del código dentro del bloque using*/
+
+            using (SqlConnection conexion = new SqlConnection(StrCadenaConexion)) //INICIO CONEXION
             {
-                /*
                 try
                 {
                     conexion.Open();
-                    SqlCommand comando = conexion.CreateCommand();
-                    comando.CommandText = StrComandoSql;
-                    int inRegistrosAfectados = comando.ExecuteNonQuery();
-                    if (inRegistrosAfectados == 1)
-                        lblMensajes.Text = "Registro modficado correctamente";
+                    SqlCommand comando = new SqlCommand(update, conexion); //OBJETO QUE UTILIZA LA CONEXION Y EL UPDATE
+
+                    // Agrega parámetros a la declaración SQL
+                    comando.Parameters.AddWithValue("@Descripcion", strDescripcion);
+                    comando.Parameters.AddWithValue("@Precio", dcPrecio);
+                    comando.Parameters.AddWithValue("@IdUnidad", strIdUnidad);
+                    comando.Parameters.AddWithValue("@IdTipo", strIdTipo);
+                    comando.Parameters.AddWithValue("@IdProducto", strIdProducto);
+
+                    // Ejecuta la declaración SQL de actualización y devuelve la cantidad de filas afectadas
+                    int rowsAffected = comando.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        lblMensajes.Text = "Registro actualizado correctamente.";
+                    }
                     else
-                        lblMensajes.Text = "Error al modificar el registro";
-                    btnNuevo.Visible = true;
+                    {
+                        lblMensajes.Text = "No se pudo actualizar el registro.";
+                    }
+
+                    // Actualiza la visibilidad de los botones según sea necesario
+                    btnInsertar.Visible = true;
+                    btnModificar.Visible = false;
                 }
                 catch (SqlException ex)
                 {
@@ -250,12 +273,89 @@ namespace GesTienda
                     StrError = StrError + "<div>Código: " + ex.Number + "</div>";
                     StrError = StrError + "<div>Descripción: " + ex.Message + "</div>";
                     lblMensajes.Text = StrError;
-                    return;
-                }*/
-           }
+                }
+            } //CIERRE CONEXION
+
+            // Actualiza el grid y restablece los controles
             grdProductos.DataBind();
             grdProductos.SelectedIndex = -1;
             FnDeshabilitarControles();
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            lblMensajes.Text = "";
+
+            // Recupera el ID del producto que se eliminará
+            string strIdProducto = txtIdProducto.Text;
+
+            // Define la declaración SQL para eliminar un registro por su ID
+            string deleteQuery = "DELETE FROM PRODUCTO WHERE IdProducto = @IdProducto";
+
+            // Establecer la cadena de conexión a la base de datos
+            string StrCadenaConexion = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
+            // Crear una conexión a la base de datos y utilizar la declaración DELETE
+            using (SqlConnection conexion = new SqlConnection(StrCadenaConexion))
+            {
+                try
+                {
+                    conexion.Open();
+                    SqlCommand comando = new SqlCommand(deleteQuery, conexion);
+
+                    // Agregar el parámetro para el ID del producto a eliminar
+                    comando.Parameters.AddWithValue("@IdProducto", strIdProducto);
+
+                    // Ejecutar la declaración DELETE y obtener la cantidad de filas afectadas
+                    int rowsAffected = comando.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        lblMensajes.Text = "Registro eliminado correctamente.";
+                    }
+                    else
+                    {
+                        lblMensajes.Text = "No se pudo eliminar el registro. Es posible que el ID no exista.";
+                    }
+
+                    // Restablecer la visibilidad de los botones según sea necesario
+                    btnInsertar.Visible = true;
+                    btnModificar.Visible = false;
+                    btnEliminar.Visible = false; // Puedes ocultar el botón "Eliminar" después de la eliminación.
+
+                    // Actualiza el grid y restablece los controles
+                    grdProductos.DataBind();
+                    grdProductos.SelectedIndex = -1;
+                    FnDeshabilitarControles();
+                }
+                catch (SqlException ex)
+                {
+                    string StrError = "<p>Se han producido errores en el acceso a la base de datos.</p>";
+                    StrError = StrError + "<div>Código: " + ex.Number + "</div>";
+                    StrError = StrError + "<div>Descripción: " + ex.Message + "</div>";
+                    lblMensajes.Text = StrError;
+                }
+            } // Cierre de la conexión
+
+
+            //PROPIEDADES DE BOTON CANCELAR
+            lblMensajes.Text = "";
+            btnNuevo.Visible = true;
+            btnEditar.Visible = false;
+            btnEliminar.Visible = false;
+            btnInsertar.Visible = false;
+            btnModificar.Visible = false;
+            btnBorrar.Visible = false;
+            btnCancelar.Visible = false;
+            txtIdProducto.Text = "";
+            txtDesPro.Text = "";
+            txtPrePro.Text = Convert.ToString(0);
+            ddlIdUnidad.DataBind();
+            ddlIdTipo.DataBind();
+            grdProductos.SelectedIndex = -1;
+            FnDeshabilitarControles();
+
+
         }
     }
 }

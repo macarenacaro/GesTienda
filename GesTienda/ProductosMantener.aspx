@@ -45,7 +45,7 @@
         
             <asp:Button runat="server" Text="Nuevo" ID="btnNuevo" Visible="true" OnClick="btnNuevo_Click" />
             <asp:Button runat="server" Text="Editar" ID="btnEditar" Visible="False" OnClick="btnEditar_Click"   />
-            <asp:Button runat="server" Text="Eliminar" ID="btnEliminar" Visible="False"  />
+            <asp:Button runat="server" Text="Eliminar" ID="btnEliminar" Visible="False" OnClick="btnEliminar_Click"  />
             <asp:Button runat="server" Text="Insertar" ID="btnInsertar" Visible="False" OnClick="btnInsertar_Click"  />
             <asp:Button runat="server" Text="Modificar" ID="btnModificar" Visible="False" OnClick="btnModificar_Click"  />
             <asp:Button runat="server" Text="Borrar" ID="btnBorrar" Visible="False"  />
