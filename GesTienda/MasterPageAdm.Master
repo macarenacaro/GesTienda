@@ -35,18 +35,15 @@
                    <asp:TreeView ID="TreeView1" runat="server" ImageSet="Arrows">
                        <Nodes>
                            <asp:TreeNode Text="Inicio" Value="Inicio" NavigateUrl="~/InicioAdmin.aspx"></asp:TreeNode>
+
                            <asp:TreeNode Expanded="False" SelectAction="Expand" Text="Productos" Value="Productos">
                                <asp:TreeNode Text="Mantener productos" Value="Mantener productos" NavigateUrl="~/ProductosMantener.aspx"></asp:TreeNode>
                            </asp:TreeNode>
+
                            <asp:TreeNode Expanded="False" SelectAction="Expand" Text="Ventas" Value="Ventas">
                                <asp:TreeNode Text="Pedidos por cliente" Value="Pedidos por cliente" NavigateUrl="~/PedidosPorCliente.aspx"></asp:TreeNode>
                            </asp:TreeNode>
-                           <asp:TreeNode Expanded="False" SelectAction="Expand" Text="Clientes" Value="Clientes">
-                               <asp:TreeNode Text="Clientes por ciudad" Value="Clientes por ciudad"></asp:TreeNode>
-                           </asp:TreeNode>
-                           <asp:TreeNode Expanded="False" SelectAction="Expand" Text="Usuarios" Value="Usuarios">
-                               <asp:TreeNode Text="Mantener usuarios" Value="Mantener usuarios"></asp:TreeNode>
-                           </asp:TreeNode>
+
                        </Nodes>
                    </asp:TreeView>
                    <br />
