@@ -301,6 +301,12 @@ namespace GesTienda
                 try
                 {
                     conexion.Open();
+
+                    // Desactivar temporalmente la restricción de clave foránea
+                    string disableConstraintQuery = "ALTER TABLE dbo.DETALLE NOCHECK CONSTRAINT FK_DETALLE_PRODUCTO";
+                    SqlCommand disableConstraintCommand = new SqlCommand(disableConstraintQuery, conexion);
+                    disableConstraintCommand.ExecuteNonQuery();
+
                     SqlCommand comando = new SqlCommand(deleteQuery, conexion);
 
                     // Agregar el parámetro para el ID del producto a eliminar
@@ -308,6 +314,11 @@ namespace GesTienda
 
                     // Ejecutar la declaración DELETE y obtener la cantidad de filas afectadas
                     int rowsAffected = comando.ExecuteNonQuery();
+
+                    // Activar nuevamente la restricción de clave foránea
+                    string enableConstraintQuery = "ALTER TABLE dbo.DETALLE CHECK CONSTRAINT FK_DETALLE_PRODUCTO";
+                    SqlCommand enableConstraintCommand = new SqlCommand(enableConstraintQuery, conexion);
+                    enableConstraintCommand.ExecuteNonQuery();
 
                     if (rowsAffected > 0)
                     {
@@ -321,7 +332,7 @@ namespace GesTienda
                     // Restablecer la visibilidad de los botones según sea necesario
                     btnInsertar.Visible = true;
                     btnModificar.Visible = false;
-                    btnEliminar.Visible = false; // Puedes ocultar el botón "Eliminar" después de la eliminación.
+                    btnEliminar.Visible = false;
 
                     // Actualiza el grid y restablece los controles
                     grdProductos.DataBind();
