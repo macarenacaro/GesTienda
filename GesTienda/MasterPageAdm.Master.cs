@@ -11,11 +11,11 @@ namespace Prueba
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-          /*  if (Convert.ToString(Session["Rol"]) != "A")
+            if (Convert.ToString(Session["Rol"]) != "A")
             {
                 Response.Redirect("~/Default.aspx");
             }
-            lblDatosUsuario.Text = Convert.ToString(Session["Nombre"]);*/
+            lblDatosUsuario.Text = Convert.ToString(Session["Nombre"]);
         }
 
         protected void btnCerrar_Click(object sender, EventArgs e)
